@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+<body>
+
+<h1>A Web Page</h1>
+<div id="jacob">
+
+</div>
+
+<script>
+	var l = document.getElementById('jacob');
+	var log = function (m) {
+		var i = document.createElement('li');
+		i.innerText = new Date().toISOString()+' '+m;
+		l.appendChild(i);
+	}
+	log('opening websocket connection');
+	var s = new WebSocket('ws://raspberrypi/');
+	s.addEventListener('error', function (m) { log("error"); });
+	s.addEventListener('open', function (m) { log("websocket connection open"); });
+	s.addEventListener('message', function (m) { log(m.data); });
+	</script>
+</body>
+</html>
