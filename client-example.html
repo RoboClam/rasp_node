@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--Add chat input-->
 <!--Add chat name-->
-<!--Add chat send button-->
 </head>
 <body>
 
-<h1>A Web Page</h1>
+<h1>Chat log for </h1><input type="text" id="chat_name" name="chat_name" value="">
 <div id="chat_log"></div>
 <form>
 	<input type="text" id="chat_input" name="chat_input" value="Say Hi!">
@@ -29,7 +27,9 @@
 
 	
 	var send = function (input) {
-		s.send(input);
+		let name = document.getElementById("chat_name").value;
+		let packet = JSON.stringify({"who": name, "message": input});
+		s.send(packet);
 		console.log(input);
 	}
 	</script>
