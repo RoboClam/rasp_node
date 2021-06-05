@@ -4,7 +4,9 @@ const wss = new WebSocket.Server({ port: 7777 });
 
 wss.on('connection', function connection(ws, req) {
   let ip = req.headers['x-forwarded-for'];
-  ip?.split(',')[0].trim();
+  console.log(ip);
+  if(ip)
+  	console.log(ip.split(',')[0].trim());
   ws.on('message', function incoming(data) {
     console.log('received: %s', data);
     wss.clients.forEach(function each(client) { // Relay incoming message to all clients EXCLUDING self
