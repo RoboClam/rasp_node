@@ -11,7 +11,8 @@ wss.on('connection', function connection(ws, req) {
     console.log('received: %s', data);
     wss.clients.forEach(function each(client) { // Relay incoming message to all clients EXCLUDING self
       if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send({'who' : ip ? ip : "unknown", 'message' : data});
+		  let packet = JSON.stringify({'who' : ip ? ip : "unknown", 'message' : data});
+        client.send(packet);
       }
     });
   });
