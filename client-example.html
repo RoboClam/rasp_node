@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+<!--Add chat input-->
+<!--Add chat name-->
+<!--Add chat send button-->
 </head>
 <body>
 
 <h1>A Web Page</h1>
-<div id="jacob">
-
-</div>
+<div id="chat_log"></div>
+<form>
+	<input type="text" id="chat_input" name="chat_input" value="Say Hi!">
+	<input type="button" value="Send" onclick="send(document.getElementById('chat_input').value)">
+</form> 
 
 <script>
-	var l = document.getElementById('jacob');
+	var l = document.getElementById('chat_log');
 	var log = function (m) {
 		var i = document.createElement('li');
-		i.innerText = new Date().toISOString()+' '+m;
+		i.innerText = m;
 		l.appendChild(i);
 	}
 	log('opening websocket connection');
@@ -22,6 +26,12 @@
 	s.addEventListener('error', function (m) { log("error"); console.log(m)});
 	s.addEventListener('open', function (m) { log("websocket connection open"); });
 	s.addEventListener('message', function (m) { log(m.data); });
+
+	
+	var send = function (input) {
+		s.send(input);
+		console.log(input);
+	}
 	</script>
 </body>
 </html>
