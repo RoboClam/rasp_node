@@ -18,8 +18,8 @@
 		l.appendChild(i);
 	}
 	log('opening websocket connection');
-	var s = new WebSocket('ws://raspberrypi/');
-	s.addEventListener('error', function (m) { log("error"); });
+	var s = new WebSocket('ws://raspberrypi');
+	s.addEventListener('error', function (m) { log("error"); console.log(m)});
 	s.addEventListener('open', function (m) { log("websocket connection open"); });
 	s.addEventListener('message', function (m) { log(m.data); });
 	</script>
