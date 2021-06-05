@@ -10,7 +10,7 @@ wss.on('connection', function connection(ws, req) {
   ws.on('message', function incoming(incoming) {
 	let parsed = JSON.parse(incoming);
 	let data = parsed.message;
-	let who = parsed.who;
+	let who = parsed.who !== "" ? parsed.who : "unknown";
 	console.log('%s says: %s', who, data);
     wss.clients.forEach(function each(client) { // Relay incoming message to all clients EXCLUDING self
       if (client !== ws && client.readyState === WebSocket.OPEN) {
