@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--Add chat name-->
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!--break out js and link-->
+	<!--style chat screen-->
 </head>
-<body>
+<body class="text-center">
 
-<h1>Chat log for </h1><input type="text" id="chat_name" name="chat_name" value="">
+<label for="name" class="h1">Chat log for: </label><input type="text" id="chat_name" name="chat_name" value="">
 <div id="chat_log"></div>
 <form>
 	<input type="text" id="chat_input" name="chat_input" value="Say Hi!">
@@ -14,23 +17,34 @@
 
 <script>
 	var l = document.getElementById('chat_log');
-	var log = function (m) {
+	var appendMessage = function (m) {
+		console.log(m);
+		if(m.who) {
+			console.log(m.who);
+		}
 		var i = document.createElement('li');
-		i.innerText = m;
+		try {
+			
+			var parsed = JSON.parse(m);
+		} catch( e ) {
+			console.log(e);
+			var parsed = {'who': 'System', 'message': m};
+		}
+		i.innerText = `${parsed.who}: ${parsed.message}`;
 		l.appendChild(i);
 	}
-	log('opening websocket connection');
+	// log('opening websocket connection');
 	var s = new WebSocket('ws://raspberrypi');
-	s.addEventListener('error', function (m) { log("error"); console.log(m)});
-	s.addEventListener('open', function (m) { log("websocket connection open"); });
-	s.addEventListener('message', function (m) { log(m.data); });
+	s.addEventListener('error', function (m) { console.log("error"); console.log(m)});
+	s.addEventListener('open', function (m) { console.log("websocket connection open"); });
+	s.addEventListener('message', function (m) { appendMessage(m.data); });
 
 	
 	var send = function (input) {
 		let name = document.getElementById("chat_name").value;
 		let packet = JSON.stringify({"who": name, "message": input});
+		this.appendMessage(JSON.stringify({"who": "Me", "message": input}));
 		s.send(packet);
-		console.log(input);
 	}
 	</script>
 </body>

@@ -2,7 +2,7 @@
   "name": "rasp_node",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "websocket.js",
   "dependencies": {
     "express": "^4.17.1",
     "ws": "^7.4.6"
