@@ -52,7 +52,7 @@
 			l.appendChild(i);
 		}
 		// log('opening websocket connection');
-		var s = new WebSocket('ws://raspberrypi/ws');
+		var s = new WebSocket('ws://raspberrypi/');
 		s.addEventListener('error', function (m) { console.log("error"); console.log(m) });
 		s.addEventListener('open', function (m) { console.log("websocket connection open"); });
 		s.addEventListener('message', function (m) { appendMessage(m.data); });

@@ -3,6 +3,7 @@ const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 7777 });
 
 wss.on('connection', function connection(ws, req) {
+  console.log("New Connection...");
   ws.on('message', function incoming(incoming) {
 	let parsed = JSON.parse(incoming);
 	let data = parsed.message;
