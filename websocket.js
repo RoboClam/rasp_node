@@ -18,4 +18,7 @@ wss.on('connection', function connection(ws, req) {
   });
 
   ws.send('You are now connected to the network! Welcome Aboard.');
+  setInterval( () => {
+    ws.send("Hello?");
+  }, 700);
 });
