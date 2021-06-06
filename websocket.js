@@ -36,5 +36,5 @@ wss.on('connection', function connection(ws, req) {
   setInterval(() => {
     let unityPacket = JSON.stringify({'who': 'someone', 'xx' : xx++, 'yy' : yy++, 'zz' : zz++});
     ws.send(unityPacket);
-  }, 1700);
+  }, 16);
 });
