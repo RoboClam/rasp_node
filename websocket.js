@@ -30,7 +30,9 @@ wss.on('connection', function connection(ws, req) {
   ws.send('You are now connected to the network! Welcome Aboard.');
 
 
-  let xx, yy, zz = 0;
+  let xx = 0;
+  let yy = 0;
+  let zz = 0;
   setInterval(() => {
     let unityPacket = JSON.stringify({'who': 'someone', 'xx' : xx++, 'yy' : yy++, 'zz' : zz++});
     ws.send(unityPacket);
